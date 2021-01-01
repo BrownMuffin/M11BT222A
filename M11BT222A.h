@@ -101,9 +101,9 @@ class M11BT222A
 		void showColon(int8_t index, bool visible);
 		
 		// 15 SEGMENT FUNCTIONS
-		void showLetter(unsigned char seg, unsigned char letter);
-		void hideLetter(unsigned char seg);
-		void showLetterCustom(unsigned char seg, unsigned int data);
+		void showCharacter(unsigned char seg, unsigned char letter);
+		void hideCharacter(unsigned char seg);
+		void showCharacterCustom(unsigned char seg, unsigned int data);
 		
 		// ICON FUNCTIONS
 		void showIconAuto(bool visible);

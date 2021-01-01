@@ -201,7 +201,7 @@ void M11BT222A::showColon(int8_t index, bool visible)
 //   15 SEGMENT FUNCTIONS
 // ===========================================================================
 
-void M11BT222A::showLetter(unsigned char seg, unsigned char letter)
+void M11BT222A::showCharacter(unsigned char seg, unsigned char letter)
 {	
 	if (letter < 32 || letter > 127) letter = 127;
 
@@ -210,7 +210,7 @@ void M11BT222A::showLetter(unsigned char seg, unsigned char letter)
 	showLetterCustom(seg, data);
 }
 
-void M11BT222A::hideLetter(unsigned char seg)
+void M11BT222A::hideCharacter(unsigned char seg)
 {
 	// Clamp the values
 	if (seg > 4) return;
@@ -218,7 +218,7 @@ void M11BT222A::hideLetter(unsigned char seg)
 	showLetterCustom(seg, 0x0000);
 }
 
-void M11BT222A::showLetterCustom(unsigned char seg, unsigned int data)
+void M11BT222A::showCharacterCustom(unsigned char seg, unsigned int data)
 {
 	// Clamp the values
 	if (seg > 4) return;
