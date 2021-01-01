@@ -58,6 +58,7 @@ class M11BT222A
 	private:
 		int8_t en_pin, din_pin, clk_pin, stb_pin;
 		
+		unsigned char brightnessRam;
 		unsigned char digitRam[8];
 		unsigned char recRam;
 		unsigned int networkRam;
@@ -86,11 +87,14 @@ class M11BT222A
 	public:
 		M11BT222A(int8_t enable_pin, int8_t data_in_pin, int8_t clock_pin, int8_t strobe_pin);
 		void initDisplay();
-		void clearDisplay();		
+		void initDisplay(unsigned char brightness);
+		void clearDisplay();
+		void setBrightness(unsigned char brightness);
+		void toggleDisplay(bool show);
 		
 		// 7 SEGMENT FUNCTIONS
-		void showNumbers(unsigned char val0x0000, unsigned char val1, unsigned char val2, unsigned char val3, unsigned char val4, unsigned char val5, bool colon1, bool colon2);
-		void showNumbers(unsigned char val0x0000, unsigned char val1, unsigned char val2, unsigned char val3, unsigned char val4, unsigned char val5);
+		void showNumbers(unsigned char val, unsigned char val1, unsigned char val2, unsigned char val3, unsigned char val4, unsigned char val5, bool colon1, bool colon2);
+		void showNumbers(unsigned char val, unsigned char val1, unsigned char val2, unsigned char val3, unsigned char val4, unsigned char val5);
 		void showNumber(unsigned char seg, unsigned char val);
 		void hideNumber(unsigned char seg);
 		void showNumberCustom(unsigned char seg, unsigned char data);

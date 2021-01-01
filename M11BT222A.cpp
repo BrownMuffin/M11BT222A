@@ -6,14 +6,7 @@
 #define DMSC_11D_17S 0x0A
 
 // Display control command: set display pwm from 1/16 to 14/16 on, also the screen can be turned off
-#define DCC_ON_1 0x88		//  1/16
-#define DCC_ON_2 0x88 | 1	//  2/16
-#define DCC_ON_4 0x88 | 2	//  4/16
-#define DCC_ON_10 0x88 | 3	// 10/16
-#define DCC_ON_11 0x88 | 4	// 11/16
-#define DCC_ON_12 0x88 | 5	// 12/16
-#define DCC_ON_13 0x88 | 6	// 13/16
-#define DCC_ON_14 0x88 | 7	// 14/26
+#define DCC_ON 0x88
 #define DCC_OFF 0x80
 
 // Data setting command: Write Increment, normal mode (0100 0000)
@@ -46,6 +39,16 @@ M11BT222A::M11BT222A(int8_t enable_pin, int8_t data_in_pin, int8_t clock_pin, in
 // Configure the display 
 void M11BT222A::initDisplay()
 {
+	// Default brightness 4 / 16
+	writeCommand(DCC_ON | 4);
+	
+}
+
+void M11BT222A::initDisplay(unsigned char brightness)
+{
+	// Clamp the values
+	if (brightness > 7) brightness = 4;
+	
 	delay(200);
 	
 	digitalWrite(stb_pin, LOW);
@@ -56,7 +59,7 @@ void M11BT222A::initDisplay()
 
 	clearDisplay();
 	writeCommand(DMSC_11D_17S); // DMSC: 11 digits x 17 segments
-	writeCommand(DCC_ON_4); 	// DCC: On, Pulse width: 4/16
+	setBrightness(brightness);
 }
 
 void M11BT222A::clearDisplay()
@@ -71,6 +74,22 @@ void M11BT222A::clearDisplay()
 	discRam = 0x00; // Clear disc ram	
 }
 
+void M11BT222A::setBrightness(unsigned char brightness)
+{
+	// Clamp the values
+	if (brightness > 7) return;
+	
+	brightnessRam = brightness;
+	writeCommand(DCC_ON | brightness);
+}
+
+void M11BT222A::toggleDisplay(bool show)
+{
+	if (show)
+		writeCommand(DCC_ON | brightnessRam);
+	else
+		writeCommand(DCC_OFF);
+}
 
 // ===========================================================================
 //   7 SEGMENT FUNCTIONS
@@ -143,8 +162,9 @@ void M11BT222A::showNumberCustom(unsigned char seg, unsigned char data)
 		addr = ADDR_DIGIT_5;
 	
 	// Keep the colon info
+	digitRam &=  0x7F;
 	colonData = digitRam[addr - ADDR_DIGIT_0];
-	colonData = colonData & 0x80;
+	colonData &= 0x80;
 	data = data | colonData;
 	digitRam[addr - ADDR_DIGIT_0] = data;
 	
