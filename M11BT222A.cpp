@@ -162,13 +162,21 @@ void M11BT222A::showNumberCustom(unsigned char seg, unsigned char data)
 		addr = ADDR_DIGIT_5;
 	
 	// Keep the colon info
-	digitRam &=  0x7F;
+	digitRam[addr - ADDR_DIGIT_0] &= 0x7F;
 	colonData = digitRam[addr - ADDR_DIGIT_0];
 	colonData &= 0x80;
 	data = data | colonData;
 	digitRam[addr - ADDR_DIGIT_0] = data;
 	
 	writeDisplayRam(addr, data);
+}
+
+void M11BT222A::showColons(bool colon1, bool colon2, bool colon3, bool colon4)
+{
+	showColon(0, colon1);
+	showColon(1, colon2);
+	showColon(2, colon3);
+	showColon(3, colon4);
 }
 
 void M11BT222A::showColon(int8_t index, bool visible)
@@ -207,7 +215,7 @@ void M11BT222A::showCharacter(unsigned char seg, unsigned char letter)
 
 	unsigned int data = charData[(int)letter - 32];
 	
-	showLetterCustom(seg, data);
+	showCharacterCustom(seg, data);
 }
 
 void M11BT222A::hideCharacter(unsigned char seg)
@@ -215,7 +223,7 @@ void M11BT222A::hideCharacter(unsigned char seg)
 	// Clamp the values
 	if (seg > 4) return;
 	
-	showLetterCustom(seg, 0x0000);
+	showCharacterCustom(seg, 0x0000);
 }
 
 void M11BT222A::showCharacterCustom(unsigned char seg, unsigned int data)

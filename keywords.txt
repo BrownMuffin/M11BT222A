@@ -19,11 +19,12 @@ showNumbers			KEYWORD2
 showNumber			KEYWORD2
 hideNumber			KEYWORD2
 showNumberCustom	KEYWORD2
+showColons			KEYWORD2
 showColon			KEYWORD2
 
-showLetter			KEYWORD2
-hideLetter			KEYWORD2
-showLetterCustom	KEYWORD2
+showCharacter		KEYWORD2
+hideCharacter		KEYWORD2
+showCharacterCustom	KEYWORD2
 
 showIconAuto		KEYWORD2
 showIconEpg			KEYWORD2
