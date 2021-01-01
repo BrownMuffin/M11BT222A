@@ -8,13 +8,15 @@ Arduino library for the Futaba M11BT222A display
 The [Futaba](http://www.futaba.co.jp/en/display/vfd/) M11BT222A is a [Vacuum Fluorescent Display (VFD)](https://en.wikipedia.org/wiki/Vacuum_fluorescent_display). The display is based around the Princeton Technology Corp. [PT6311](http://www.princeton.com.tw/Portals/0/Product/PT6311_10.pdf) VFD driver IC.
 
 ##  Table of contents
-
- - Introduction
- - [Connections](/#Connections)
- - [Digits](/#Digits)
-	 - Usage
-	 - Explained
-- [PT6311](/#PT6311)
+ - [Introduction](https://github.com/BrownMuffin/M11BT222A#introduction)
+ - [Connections](https://github.com/BrownMuffin/M11BT222A#connections)
+ - [Digits](https://github.com/BrownMuffin/M11BT222A#digits)
+	 - [Usage](https://github.com/BrownMuffin/M11BT222A#usage)
+	 - [Explained](https://github.com/BrownMuffin/M11BT222A#explained)
+- [Characters](https://github.com/BrownMuffin/M11BT222A#characters)
+	- [Usage](https://github.com/BrownMuffin/M11BT222A#usage-1)
+	- [Explained](https://github.com/BrownMuffin/M11BT222A#explained-1)
+- [PT6311](https://github.com/BrownMuffin/M11BT222A#pt6311)
   - Display mode settings commands
   - Data setting commands
   - Address setting commands
@@ -109,11 +111,37 @@ D | `0111 1010` |  `0x7A`
 E | `0110 1101` |  `0x6D`
 F | `0010 1101` |  `0x2D`
 
-## Letters
+## Characters
+The M11BT222A has 5 15-segment displays to display characters. With scrolling text it will be possible to display a text.
 
 ### Usage
 
 ### Explained
+Each character exsists of a top and bottom part, the addresses of these displays are from left to right: `0x0C` `0x0D`, `0x09` `0x0A`, `0x06` `0x07`, `0x03` `0x04`, `0x00` `0x01`. 
+
+The order of the segment order is (T is top segment, B is bottom segment):
+|    | T0 | T0 | T0 | T0 | T0 | T0 | T0 | T0 | T0 |    |
+| -- | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- |
+| T5 | T1 |    |    |    | T2 |    |    |    | T3 | T4 |
+| T5 |    | T1 |    |    | T2 |    |    | T3 |    | T4 |
+| T5 |    | T1 |    |    | T2 |    |    | T3 |    | T4 |
+| T5 |    |    | T1 |    | T2 |    | T3 |    |    | T4 |
+| T5 |    |    | T1 |    | T2 |    | T3 |    |    | T4 |
+| T5 |    |    |    | T1 | T2 | T3 |    |    |    | T4 |
+|    | B0 | B0 | B0 |    | T7 |    | T6 | T6 | T6 |    |
+| B2 |    |    |    | B3 | B4 | B5 |    |    |    | B1 |
+| B2 |    |    | B3 |    | B4 |    | B5 |    |    | B1 |
+| B2 |    |    | B3 |    | B4 |    | B5 |    |    | B1 |
+| B2 |    | B3 |    |    | B4 |    |    | B5 |    | B1 |
+| B2 |    | B3 |    |    | B4 |    |    | B5 |    | B1 |
+| B2 | B3 |    |    |    | B4 |    |    |    | B5 | B1 |
+|    | B6 | B6 | B6 | B6 | B6 | B6 | B6 | B6 | B6 |    |
+
+The character set is based on the [ASCII table](https://en.wikipedia.org/wiki/ASCII). The first 32 entries (control codes) of the ASCII table are skipped. 
+Most of the ASCII character from 32 to 127 are created, the ones that are not created will be empty. 
+The missing characters are: `% & . [ ] { }`. The `DEL` character is changed to a square with a cross in it.
+
+The character set can be found here: [Character set](https://github.com/BrownMuffin/M11BT222A/blob/master/character-set.md)
 
 ## Icons
 
