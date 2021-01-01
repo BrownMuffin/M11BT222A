@@ -1,4 +1,4 @@
-[← Back](https://github.com/BrownMuffin/M11BT222A#usage-1)
+[← Back](https://github.com/BrownMuffin/M11BT222A#explained-1)
 
 This is the 15 segment display character set:
 
