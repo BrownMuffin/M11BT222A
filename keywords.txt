@@ -1,0 +1,62 @@
+#######################################
+# Syntax Coloring Map M11BT222A
+#######################################
+
+#######################################
+# Datatypes	(KEYWORD1)
+#######################################
+
+M11BT222A			KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+initDisplay			KEYWORD2
+clearDisplay		KEYWORD2
+
+showNumbers			KEYWORD2
+showNumber			KEYWORD2
+hideNumber			KEYWORD2
+showNumberCustom	KEYWORD2
+showColon			KEYWORD2
+
+showLetter			KEYWORD2
+hideLetter			KEYWORD2
+showLetterCustom	KEYWORD2
+
+showIconAuto		KEYWORD2
+showIconEpg			KEYWORD2
+showIconTrans		KEYWORD2
+showIconMail		KEYWORD2
+showIconRate		KEYWORD2
+showIconTitle		KEYWORD2
+showIconChp			KEYWORD2
+showIconTrk			KEYWORD2
+showIconCh			KEYWORD2
+showIconHdd			KEYWORD2
+showIconHddRec		KEYWORD2
+showIconDvd			KEYWORD2
+showIconDvdRec		KEYWORD2
+showIconNetwork		KEYWORD2
+showIconMusic		KEYWORD2
+showIconUsb			KEYWORD2
+
+toggleNetworkDots	KEYWORD2
+toggleNetworkDot	KEYWORD2
+updateNetworkDots	KEYWORD2
+
+toggleBlocks		KEYWORD2
+toggleBlock			KEYWORD2
+updateBlocks		KEYWORD2
+
+toggleDots			KEYWORD2
+toggleDot			KEYWORD2
+
+toggleDisc			KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
+
