@@ -98,6 +98,7 @@ class M11BT222A
 		void showNumber(unsigned char seg, unsigned char val);
 		void hideNumber(unsigned char seg);
 		void showNumberCustom(unsigned char seg, unsigned char data);
+		void showColons(bool colon1, bool colon2, bool colon3, bool colon4);
 		void showColon(int8_t index, bool visible);
 		
 		// 15 SEGMENT FUNCTIONS
