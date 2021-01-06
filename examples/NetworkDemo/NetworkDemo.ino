@@ -84,41 +84,15 @@ void loop() {
   // Double dot
   for (unsigned char i = 0; i < 5; i++)
   {
-    screen.clearNetworkDots();
-    screen.toggleNetworkDot(0, true);
-    screen.toggleNetworkDot(7, true);
-    screen.updateNetworkDots();
-    delay(100);
-    screen.clearNetworkDots();
-    screen.toggleNetworkDot(1, true);
-    screen.toggleNetworkDot(8, true);
-    screen.updateNetworkDots();
-    delay(100);
-    screen.clearNetworkDots();
-    screen.toggleNetworkDot(2, true);
-    screen.toggleNetworkDot(9, true);
-    screen.updateNetworkDots();
-    delay(100);
-    screen.clearNetworkDots();
-    screen.toggleNetworkDot(3, true);
-    screen.toggleNetworkDot(10, true);
-    screen.updateNetworkDots();
-    delay(100);
-    screen.clearNetworkDots();
-    screen.toggleNetworkDot(4, true);
-    screen.toggleNetworkDot(11, true);
-    screen.updateNetworkDots();
-    delay(100);
-    screen.clearNetworkDots();
-    screen.toggleNetworkDot(5, true);
-    screen.toggleNetworkDot(12, true);
-    screen.updateNetworkDots();
-    delay(100);
-    screen.clearNetworkDots();
-    screen.toggleNetworkDot(6, true);
-    screen.toggleNetworkDot(13, true);
-    screen.updateNetworkDots();
-    delay(300);
+    for (unsigned char j = 0; j < 7; j++)
+	  {
+  	  screen.clearNetworkDots();
+  	  screen.toggleNetworkDot(j, true);
+  	  screen.toggleNetworkDot(j + 7, true);
+  	  screen.updateNetworkDots();
+  	  delay(100);
+	  }
+    delay(200);
   }
 
   screen.clearDisplay();
