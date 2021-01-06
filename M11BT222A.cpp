@@ -55,7 +55,7 @@ void M11BT222A::initDisplay(unsigned char brightness)
 	digitalWrite(clk_pin, LOW);
 	digitalWrite(din_pin, HIGH);  
 
-	__asm__("nop\n\t""nop\n\t");
+	__asm__("nop\nnop\n");
 
 	clearDisplay();
 	writeCommand(DMSC_11D_17S); // DMSC: 11 digits x 17 segments
@@ -521,10 +521,10 @@ void M11BT222A::writeDisplayRam(unsigned char addr, unsigned char data)
 
 	digitalWrite(stb_pin, HIGH);
 	writeData(0xC0 | addr);
-	writeData(data++);
+	writeData(data);
 
 	digitalWrite(stb_pin, LOW);
-	__asm__("nop\n\t""nop\n\t");
+	__asm__("nop\nnop\n");
 }
 
 // Write data to the display
@@ -542,7 +542,7 @@ void M11BT222A::writeData(unsigned char data)
 		data >>= 1;
 
 		digitalWrite(clk_pin, LOW);
-		__asm__("nop\n\t""nop\n\t");
+		__asm__("nop\nnop\n");
 	}
 }
 
@@ -553,10 +553,10 @@ void M11BT222A::writeCommand(unsigned char cmd)
 	writeData(cmd);
 
 	digitalWrite(stb_pin, LOW);
-	__asm__("nop\n\t""nop\n\t");
+	__asm__("nop\nnop\n");
 }
 
-// Write to the memmory of the display
+// Write to the complete memory of the display
 void M11BT222A::writeMemory(unsigned char mem)
 {
 	writeCommand(DSC_W_INC_N);
@@ -570,5 +570,5 @@ void M11BT222A::writeMemory(unsigned char mem)
 	}
 
 	digitalWrite(stb_pin, LOW);
-  __asm__("nop\n\t""nop\n\t");
+  __asm__("nop\nnop\n");
 }
