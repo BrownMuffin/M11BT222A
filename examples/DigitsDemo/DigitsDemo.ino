@@ -27,7 +27,7 @@ void loop() {
   delay(1000);
 
   // Show a custom number
-  for (unsigned char i; i < 6; i++)
+  for (unsigned char i = 0; i < 6; i++)
   {
     screen.showNumberCustom(i, 0x01); // 0000 0001
     delay(100);
