@@ -162,10 +162,14 @@ void M11BT222A::showNumberCustom(unsigned char seg, unsigned char data)
 		addr = ADDR_DIGIT_5;
 	
 	// Keep the colon info
-	digitRam[addr - ADDR_DIGIT_0] &= 0x7F;
 	colonData = digitRam[addr - ADDR_DIGIT_0];
 	colonData &= 0x80;
+	
+	// Remove the colon info from the digit data
+	data &= 0x7F;
+	
 	data = data | colonData;
+	
 	digitRam[addr - ADDR_DIGIT_0] = data;
 	
 	writeDisplayRam(addr, data);
@@ -197,7 +201,8 @@ void M11BT222A::showColon(int8_t index, bool visible)
 	
 	// Keep the digit info
 	digitData = digitRam[addr - ADDR_DIGIT_0];
-	digitData = digitData & 0x7F;
+	digitData &= 0x7F;
+	
 	data = data | digitData;
 	digitRam[addr - ADDR_DIGIT_0] = data;
 		
