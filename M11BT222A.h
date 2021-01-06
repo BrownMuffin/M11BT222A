@@ -127,6 +127,7 @@ class M11BT222A
 		// NETWORK FUNCTIONS
 		void toggleNetworkDots(unsigned int dots);
 		void toggleNetworkDot(unsigned char index, bool visible);
+		void clearNetworkDots();
 		void updateNetworkDots();
 		
 		// BLOCK FUNCTIONS

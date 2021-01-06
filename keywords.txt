@@ -45,6 +45,7 @@ showIconUsb			KEYWORD2
 
 toggleNetworkDots	KEYWORD2
 toggleNetworkDot	KEYWORD2
+clearNetworkDots	KEYWORD2
 updateNetworkDots	KEYWORD2
 
 toggleBlocks		KEYWORD2

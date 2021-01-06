@@ -432,6 +432,11 @@ void M11BT222A::toggleNetworkDot(unsigned char index, bool visible)
 	}
 }
 
+void M11BT222A::clearNetworkDots()
+{
+	toggleNetworkDots(0);
+}
+
 void M11BT222A::updateNetworkDots()
 {
 	writeDisplayRam(ADDR_NETWORK_TOP, networkRam);
