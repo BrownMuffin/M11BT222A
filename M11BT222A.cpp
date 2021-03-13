@@ -39,9 +39,7 @@ M11BT222A::M11BT222A(int8_t enable_pin, int8_t data_in_pin, int8_t clock_pin, in
 // Configure the display 
 void M11BT222A::initDisplay()
 {
-	// Default brightness 4 / 16
-	writeCommand(DCC_ON | 4);
-	
+	initDisplay(4);	
 }
 
 void M11BT222A::initDisplay(unsigned char brightness)
@@ -530,7 +528,7 @@ void M11BT222A::writeDisplayRam(unsigned char addr, unsigned char data)
 	writeCommand(DSC_W_INC_N);
 
 	digitalWrite(stb_pin, HIGH);
-	writeData(0xC0 | addr);
+	writeData(ASC_START | addr);
 	writeData(data);
 
 	digitalWrite(stb_pin, LOW);
