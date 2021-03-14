@@ -58,16 +58,16 @@ class M11BT222A
 	private:
 		int8_t en_pin, din_pin, clk_pin, stb_pin;
 		
-		unsigned char brightnessRam;
-		unsigned char digitRam[8];
-		unsigned char recRam;
+		byte brightnessRam;
+		byte digitRam[8];
+		byte recRam;
 		unsigned int networkRam;
 		unsigned int blocksRam;
-		unsigned char dotsRam;
-		unsigned char discRam;
+		byte dotsRam;
+		byte discRam;
 		
 		// Table for all the hexidecimal digits
-		const unsigned char digitData[16] = {
+		const byte digitData[16] = {
 		0x77, 0x12, 0x6B, 0x5B, 0x1E, 0x5D, 0x7D, 0x13, 0x7F, 0x5F, 0x3F, 0x7C, 0x65, 0x7A, 0x6D, 0x2D };
 
 		// ASCII Table with 15 segment display characters, skipped the first 32 entries to make the table smaller
@@ -79,32 +79,32 @@ class M11BT222A
 			0x0200,	0xF107,	0xD552,	0x2144,	0x9552,	0xA145,	0xA105,	0xE146,	0xF007,	0x8550,	0x1046,	0xA825,	0x2044,	0xBA06,	0xB226,	0x3146,
 			0xF105,	0x3166,	0xF125,	0xE143,	0x8510,	0x3046,	0xA80C,	0xB02E,	0x8A28,	0xF043,	0x8948,	0x0000,	0x8410,	0x0000,	0xD005,	0xBB6E };
 		
-		void writeData(unsigned char data);
-		void writeCommand(unsigned char cmd);
-		void writeMemory(unsigned char mem);
-		void writeDisplayRam(unsigned char addr, unsigned char data);
+		void writeData(byte data);
+		void writeCommand(byte cmd);
+		void writeMemory(byte mem);
+		void writeDisplayRam(byte addr, byte data);
 	
 	public:
 		M11BT222A(int8_t enable_pin, int8_t data_in_pin, int8_t clock_pin, int8_t strobe_pin);
 		void initDisplay();
-		void initDisplay(unsigned char brightness);
+		void initDisplay(byte brightness);
 		void clearDisplay();
-		void setBrightness(unsigned char brightness);
+		void setBrightness(byte brightness);
 		void toggleDisplay(bool show);
 		
 		// 7 SEGMENT FUNCTIONS
-		void showNumbers(unsigned char val, unsigned char val1, unsigned char val2, unsigned char val3, unsigned char val4, unsigned char val5, bool colon1, bool colon2);
-		void showNumbers(unsigned char val, unsigned char val1, unsigned char val2, unsigned char val3, unsigned char val4, unsigned char val5);
-		void showNumber(unsigned char seg, unsigned char val);
-		void hideNumber(unsigned char seg);
-		void showNumberCustom(unsigned char seg, unsigned char data);
+		void showNumbers(byte val, byte val1, byte val2, byte val3, byte val4, byte val5, bool colon1, bool colon2);
+		void showNumbers(byte val, byte val1, byte val2, byte val3, byte val4, byte val5);
+		void showNumber(byte seg, byte val);
+		void hideNumber(byte seg);
+		void showNumberCustom(byte seg, byte data);
 		void showColons(bool colon1, bool colon2, bool colon3, bool colon4);
 		void showColon(int8_t index, bool visible);
 		
 		// 15 SEGMENT FUNCTIONS
-		void showCharacter(unsigned char seg, unsigned char letter);
-		void hideCharacter(unsigned char seg);
-		void showCharacterCustom(unsigned char seg, unsigned int data);
+		void showCharacter(byte seg, byte letter);
+		void hideCharacter(byte seg);
+		void showCharacterCustom(byte seg, unsigned int data);
 		
 		// ICON FUNCTIONS
 		void showIconAuto(bool visible);
@@ -126,23 +126,23 @@ class M11BT222A
 		
 		// NETWORK FUNCTIONS
 		void toggleNetworkDots(unsigned int dots);
-		void toggleNetworkDot(unsigned char index, bool visible);
+		void toggleNetworkDot(byte index, bool visible);
 		void clearNetworkDots();
 		void updateNetworkDots();
 		
 		// BLOCK FUNCTIONS
 		void toggleBlocks(unsigned int blocks);
-		void toggleBlock(unsigned char x, unsigned char y, bool visible);
-		void toggleBlock(unsigned char index, bool visible);
+		void toggleBlock(byte x, byte y, bool visible);
+		void toggleBlock(byte index, bool visible);
 		void updateBlocks();
 		
 		// DOTS FUNCTIONS
-		void toggleDots(unsigned char dots);
-		void toggleDot(unsigned char index, bool visible);
+		void toggleDots(byte dots);
+		void toggleDot(byte index, bool visible);
 		
 		// DISC FUNCTIONS
-		void toggleDisc(unsigned char index, bool visible);
-		void toggleDisc(unsigned char disc);
+		void toggleDisc(byte index, bool visible);
+		void toggleDisc(byte disc);
 };
 	
 #endif
