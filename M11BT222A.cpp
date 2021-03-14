@@ -16,7 +16,7 @@
 #define ASC_START 0xC0
 
 // Set all the pins
-M11BT222A::M11BT222A(int8_t enable_pin, int8_t data_in_pin, int8_t clock_pin, int8_t strobe_pin)
+M11BT222A::M11BT222A(uint8_t enable_pin, uint8_t data_in_pin, uint8_t clock_pin, uint8_t strobe_pin)
 {
 	en_pin = enable_pin;
 	din_pin = data_in_pin;
@@ -181,7 +181,7 @@ void M11BT222A::showColons(bool colon1, bool colon2, bool colon3, bool colon4)
 	showColon(3, colon4);
 }
 
-void M11BT222A::showColon(int8_t index, bool visible)
+void M11BT222A::showColon(uint8_t index, bool visible)
 {
 	byte addr, data, digitData;
 	
@@ -216,7 +216,7 @@ void M11BT222A::showCharacter(byte seg, byte letter)
 {	
 	if (letter < 32 || letter > 127) letter = 127;
 
-	unsigned int data = charData[(int)letter - 32];
+	uint16_t data = charData[(uint8_t)letter - 32];
 	
 	showCharacterCustom(seg, data);
 }
@@ -229,7 +229,7 @@ void M11BT222A::hideCharacter(byte seg)
 	showCharacterCustom(seg, 0x0000);
 }
 
-void M11BT222A::showCharacterCustom(byte seg, unsigned int data)
+void M11BT222A::showCharacterCustom(byte seg, uint16_t data)
 {
 	// Clamp the values
 	if (seg > 4) return;
@@ -403,10 +403,12 @@ void M11BT222A::showIconUsb(bool visible)
 //   NETWORK FUNCTIONS
 // ===========================================================================
 
-void M11BT222A::toggleNetworkDots(unsigned int dots)
+void M11BT222A::toggleNetworkDots(uint16_t dots)
 {
 	// Prevent this function to turn on the Network or Music icons
-	networkRam &= (dots & 0x77);
+	networkRam &= 0x8080;
+	networkRam |= (dots & 0x7F7F);
+	updateNetworkDots();
 }
 
 void M11BT222A::toggleNetworkDot(byte index, bool visible)
@@ -438,14 +440,14 @@ void M11BT222A::clearNetworkDots()
 void M11BT222A::updateNetworkDots()
 {
 	writeDisplayRam(ADDR_NETWORK_TOP, networkRam);
-	writeDisplayRam(ADDR_NETWORK_BOT, networkRam  >> 8);
+	writeDisplayRam(ADDR_NETWORK_BOT, networkRam >> 8);
 }
 
 // ===========================================================================
 //   BLOCK FUNCTIONS
 // ===========================================================================
 
-void M11BT222A::toggleBlocks(unsigned int blocks)
+void M11BT222A::toggleBlocks(uint16_t blocks)
 {
 	blocksRam = blocks;
 }

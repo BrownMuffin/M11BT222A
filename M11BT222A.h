@@ -56,13 +56,13 @@
 class M11BT222A
 {
 	private:
-		int8_t en_pin, din_pin, clk_pin, stb_pin;
+		uint8_t en_pin, din_pin, clk_pin, stb_pin;
 		
 		byte brightnessRam;
 		byte digitRam[8];
 		byte recRam;
-		unsigned int networkRam;
-		unsigned int blocksRam;
+		uint16_t networkRam;
+		uint16_t blocksRam;
 		byte dotsRam;
 		byte discRam;
 		
@@ -71,7 +71,7 @@ class M11BT222A
 		0x77, 0x12, 0x6B, 0x5B, 0x1E, 0x5D, 0x7D, 0x13, 0x7F, 0x5F, 0x3F, 0x7C, 0x65, 0x7A, 0x6D, 0x2D };
 
 		// ASCII Table with 15 segment display characters, skipped the first 32 entries to make the table smaller
-		const unsigned int charData[96] = {
+		const uint16_t charData[96] = {
 			0x0000,	0x1002,	0x1400,	0xD453,	0xE553,	0x0000,	0x0000,	0x0800,	0x0820,	0x0208,	0xCE39,	0xC411,	0X0008,	0xC001,	0x0000,	0x8808,
 			0xB94E,	0x1802,	0xD145,	0xD143,	0xF003,	0xA161,	0xE147,	0x1102,	0xF147,	0xF143,	0x0410,	0x0408,	0x8820,	0xC041,	0x8208,	0x5110,
 			0x7544,	0xF107,	0xD552,	0x2144,	0x9552,	0xA145,	0xA105,	0xE146,	0xF007,	0x8550,	0x1046,	0xA825,	0x2044,	0xBA06,	0xB226,	0x3146,
@@ -85,7 +85,7 @@ class M11BT222A
 		void writeDisplayRam(byte addr, byte data);
 	
 	public:
-		M11BT222A(int8_t enable_pin, int8_t data_in_pin, int8_t clock_pin, int8_t strobe_pin);
+		M11BT222A(uint8_t enable_pin, uint8_t data_in_pin, uint8_t clock_pin, uint8_t strobe_pin);
 		void initDisplay();
 		void initDisplay(byte brightness);
 		void clearDisplay();
@@ -99,12 +99,12 @@ class M11BT222A
 		void hideNumber(byte seg);
 		void showNumberCustom(byte seg, byte data);
 		void showColons(bool colon1, bool colon2, bool colon3, bool colon4);
-		void showColon(int8_t index, bool visible);
+		void showColon(uint8_t index, bool visible);
 		
 		// 15 SEGMENT FUNCTIONS
 		void showCharacter(byte seg, byte letter);
 		void hideCharacter(byte seg);
-		void showCharacterCustom(byte seg, unsigned int data);
+		void showCharacterCustom(byte seg, uint16_t data);
 		
 		// ICON FUNCTIONS
 		void showIconAuto(bool visible);
@@ -125,13 +125,13 @@ class M11BT222A
 		void showIconUsb(bool visible);
 		
 		// NETWORK FUNCTIONS
-		void toggleNetworkDots(unsigned int dots);
+		void toggleNetworkDots(uint16_t dots);
 		void toggleNetworkDot(byte index, bool visible);
 		void clearNetworkDots();
 		void updateNetworkDots();
 		
 		// BLOCK FUNCTIONS
-		void toggleBlocks(unsigned int blocks);
+		void toggleBlocks(uint16_t blocks);
 		void toggleBlock(byte x, byte y, bool visible);
 		void toggleBlock(byte index, bool visible);
 		void updateBlocks();
