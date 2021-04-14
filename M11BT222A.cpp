@@ -42,7 +42,7 @@ void M11BT222A::initDisplay()
 	initDisplay(4);	
 }
 
-void M11BT222A::initDisplay(byte brightness)
+void M11BT222A::initDisplay(uint8_t brightness)
 {
 	// Clamp the values
 	if (brightness > 7) brightness = 4;
@@ -72,9 +72,9 @@ void M11BT222A::clearDisplay()
 	discRam = 0x00; // Clear disc ram	
 }
 
-void M11BT222A::setBrightness(byte brightness)
+void M11BT222A::setBrightness(uint8_t brightness)
 {
-	// Clamp the values
+	// Check if value is in range
 	if (brightness > 7) return;
 	
 	brightnessRam = brightness;
@@ -93,7 +93,7 @@ void M11BT222A::toggleDisplay(bool show)
 //   7 SEGMENT FUNCTIONS
 // ===========================================================================
 
-void M11BT222A::showNumbers(byte val0, byte val1, byte val2, byte val3, byte val4, byte val5, bool colon1, bool colon2)
+void M11BT222A::showNumbers(uint8_t val0, uint8_t val1, uint8_t val2, uint8_t val3, uint8_t val4, uint8_t val5, bool colon1, bool colon2)
 {
 	showColon(0, colon1);
 	showColon(1, colon1);
@@ -103,7 +103,7 @@ void M11BT222A::showNumbers(byte val0, byte val1, byte val2, byte val3, byte val
 	showNumbers(val0, val1, val2, val3, val4, val5);
 }
 
-void M11BT222A::showNumbers(byte val0, byte val1, byte val2, byte val3, byte val4, byte val5)
+void M11BT222A::showNumbers(uint8_t val0, uint8_t val1, uint8_t val2, uint8_t val3, uint8_t val4, uint8_t val5)
 {
 	// Clamp the values
 	if (val0 > 15) val0 = 0x00;
@@ -122,29 +122,29 @@ void M11BT222A::showNumbers(byte val0, byte val1, byte val2, byte val3, byte val
 	showNumber(0x05, val5);	
 }
 
-void M11BT222A::showNumber(byte seg, byte val)
+void M11BT222A::showNumber(uint8_t seg, uint8_t val)
 {
-	// Clamp the values
+	// Check if value is in range
 	if (seg > 5) return;
 	if (val > 0x0F) val = 0x00;
 	
 	showNumberCustom(seg, digitData[val]);
 }
 
-void M11BT222A::hideNumber(byte seg)
+void M11BT222A::hideNumber(uint8_t seg)
 {
-	// Clamp the values
+	// Check if value is in range
 	if (seg > 5) return;
 	
 	showNumberCustom(seg, 0x00);
 }
 
-void M11BT222A::showNumberCustom(byte seg, byte data)
+void M11BT222A::showNumberCustom(uint8_t seg, uint8_t data)
 {
-	// Clamp the values
+	// Check if value is in range
 	if (seg > 5) return;
 
-	byte addr, colonData;
+	uint8_t addr, colonData;
 	
 	if (seg == 0)
 		addr = ADDR_DIGIT_0;
@@ -183,7 +183,7 @@ void M11BT222A::showColons(bool colon1, bool colon2, bool colon3, bool colon4)
 
 void M11BT222A::showColon(uint8_t index, bool visible)
 {
-	byte addr, data, digitData;
+	uint8_t addr, data, digitData;
 	
 	if (index == 0)
 		addr = ADDR_COLON_0;
@@ -212,7 +212,7 @@ void M11BT222A::showColon(uint8_t index, bool visible)
 //   15 SEGMENT FUNCTIONS
 // ===========================================================================
 
-void M11BT222A::showCharacter(byte seg, byte letter)
+void M11BT222A::showCharacter(uint8_t seg, uint8_t letter)
 {	
 	if (letter < 32 || letter > 127) letter = 127;
 
@@ -221,20 +221,20 @@ void M11BT222A::showCharacter(byte seg, byte letter)
 	showCharacterCustom(seg, data);
 }
 
-void M11BT222A::hideCharacter(byte seg)
+void M11BT222A::hideCharacter(uint8_t seg)
 {
-	// Clamp the values
+	// Check if value is in range
 	if (seg > 4) return;
 	
 	showCharacterCustom(seg, 0x0000);
 }
 
-void M11BT222A::showCharacterCustom(byte seg, uint16_t data)
+void M11BT222A::showCharacterCustom(uint8_t seg, uint16_t data)
 {
-	// Clamp the values
+	// Check if value is in range
 	if (seg > 4) return;
 
-	byte addr_top, addr_bot, data_top, data_bottom;
+	uint8_t addr_top, addr_bot, data_top, data_bottom;
 	
 	data_top = data >> 8;
 	data_bottom = data;
@@ -411,9 +411,9 @@ void M11BT222A::toggleNetworkDots(uint16_t dots)
 	updateNetworkDots();
 }
 
-void M11BT222A::toggleNetworkDot(byte index, bool visible)
+void M11BT222A::toggleNetworkDot(uint8_t index, bool visible)
 {
-	// Clamp the values
+	// Check if value is in range
 	if (index > 13) return;
 	
 	if (index < 7)
@@ -452,14 +452,14 @@ void M11BT222A::toggleBlocks(uint16_t blocks)
 	blocksRam = blocks;
 }
 
-void M11BT222A::toggleBlock(byte x, byte y, bool visible)
+void M11BT222A::toggleBlock(uint8_t x, uint8_t y, bool visible)
 {
 	toggleBlock(0x0F - (y * 4 + x), visible);
 }
 
-void M11BT222A::toggleBlock(byte index, bool visible)
+void M11BT222A::toggleBlock(uint8_t index, bool visible)
 {
-	// Clamp the values
+	// Check if value is in range
 	if (index > 15) return;
 	
 	if (visible)
@@ -478,15 +478,15 @@ void M11BT222A::updateBlocks()
 //   DOTS FUNCTIONS
 // ===========================================================================
 
-void M11BT222A::toggleDots(byte dots)
+void M11BT222A::toggleDots(uint8_t dots)
 {
 	dotsRam = dots;
 	writeDisplayRam(ADDR_DISC_DOTS, dotsRam);
 }
 
-void M11BT222A::toggleDot(byte index, bool visible)
+void M11BT222A::toggleDot(uint8_t index, bool visible)
 {
-	// Clamp the values
+	// Check if value is in range
 	if (index > 3) return;
 	
 	if (visible)
@@ -501,9 +501,9 @@ void M11BT222A::toggleDot(byte index, bool visible)
 //   DISC FUNCTIONS
 // ===========================================================================
 
-void M11BT222A::toggleDisc(byte index, bool visible)
+void M11BT222A::toggleDisc(uint8_t index, bool visible)
 {
-	// Clamp the values
+	// Check if value is in range
 	if (index > 7) return;
 	
 	if (visible)
@@ -514,7 +514,7 @@ void M11BT222A::toggleDisc(byte index, bool visible)
 	writeDisplayRam(ADDR_DISC_SPINNER, discRam);
 }
 
-void M11BT222A::toggleDisc(byte disc)
+void M11BT222A::toggleDisc(uint8_t disc)
 {
 	discRam = disc;	
 	writeDisplayRam(ADDR_DISC_SPINNER, discRam);
@@ -525,7 +525,7 @@ void M11BT222A::toggleDisc(byte disc)
 // ===========================================================================
 
 // Write to the display RAM
-void M11BT222A::writeDisplayRam(byte addr, byte data)
+void M11BT222A::writeDisplayRam(uint8_t addr, uint8_t data)
 {
 	writeCommand(DSC_W_INC_N);
 
@@ -538,9 +538,9 @@ void M11BT222A::writeDisplayRam(byte addr, byte data)
 }
 
 // Write data to the display
-void M11BT222A::writeData(byte data)
+void M11BT222A::writeData(uint8_t data)
 {
-	for (byte c = 0; c < 8; c++)
+	for (uint8_t c = 0; c < 8; c++)
 	{
 		digitalWrite(clk_pin, HIGH);
 
@@ -557,7 +557,7 @@ void M11BT222A::writeData(byte data)
 }
 
 // Write a command to the display
-void M11BT222A::writeCommand(byte cmd)
+void M11BT222A::writeCommand(uint8_t cmd)
 {
 	digitalWrite(stb_pin, HIGH);
 	writeData(cmd);
@@ -567,14 +567,14 @@ void M11BT222A::writeCommand(byte cmd)
 }
 
 // Write to the complete memory of the display
-void M11BT222A::writeMemory(byte mem)
+void M11BT222A::writeMemory(uint8_t mem)
 {
 	writeCommand(DSC_W_INC_N);
 
 	digitalWrite(stb_pin, HIGH);
 	writeData(ASC_START);
 
-	for (byte c = 0; c <= LAST_ADDRESS; c++)
+	for (uint8_t c = 0; c <= LAST_ADDRESS; c++)
 	{
 		writeData(mem);
 	}
