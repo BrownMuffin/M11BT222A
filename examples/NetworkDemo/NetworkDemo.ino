@@ -17,7 +17,7 @@ void loop() {
   screen.clearDisplay();
 
   // Single dot
-  for (unsigned char i = 0; i < 5; i++)
+  for (uint8_t i = 0; i < 5; i++)
   {
     // Turn on dot with index 0
     screen.toggleNetworkDot(0, true);
@@ -101,9 +101,9 @@ void loop() {
   delay(1000);
   
   // Double dot
-  for (unsigned char i = 0; i < 5; i++)
+  for (uint8_t i = 0; i < 5; i++)
   {
-    for (unsigned char j = 0; j < 7; j++)
+    for (uint8_t j = 0; j < 7; j++)
     {
       // Turn off all the network dots
       screen.clearNetworkDots();
