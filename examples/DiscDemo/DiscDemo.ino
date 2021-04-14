@@ -24,9 +24,9 @@ void setup() {
 
 void loop() {
   // Single disc element spinning
-  for (unsigned char i = 0; i < 2; i++)
+  for (uint8_t i = 0; i < 2; i++)
   {
-    for (unsigned char j = 0; j < 8; j++)
+    for (uint8_t j = 0; j < 8; j++)
     {
       // Turn element with index 'j' on
       screen.toggleDisc(j, true);
@@ -40,12 +40,12 @@ void loop() {
   delay(500);
 
   // Double disc element spinning
-  for (unsigned char i = 0; i < 4; i++)
+  for (uint8_t i = 0; i < 4; i++)
   {
-    for (unsigned char j = 0; j < 4; j++)
+    for (uint8_t j = 0; j < 4; j++)
     {
       // Turn elements on, by bit shifting you move the elements
-      unsigned char disc = 0x11;
+      uint8_t disc = 0x11;
       screen.toggleDisc(disc << j);
       
       delay(100);
@@ -56,13 +56,13 @@ void loop() {
   delay(500);
 
   // Inverted double disc element spinning
-  for (unsigned char i = 0; i < 4; i++)
+  for (uint8_t i = 0; i < 4; i++)
   {
-    for (unsigned char j = 0; j < 4; j++)
+    for (uint8_t j = 0; j < 4; j++)
     {
       // Turn elements on, by bit shifting you move the elements
       // The ~ is bitwise NOT, and inverting the bits. Resulting in two elements that are off and the rest on.
-      unsigned char disc = 0x11;
+      uint8_t disc = 0x11;
       screen.toggleDisc(~(disc << j));
       
       delay(100);

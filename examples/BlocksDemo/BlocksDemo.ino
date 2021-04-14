@@ -156,7 +156,7 @@ void loop() {
   delay(1000);
 
   // Settings all the blocks with one int
-  for (unsigned char i = 0; i < 5; i++)
+  for (uint8_t i = 0; i < 5; i++)
   {
     screen.toggleBlocks(0xA5A5); // 1010 1010 1010 1010
     screen.updateBlocks();
@@ -170,7 +170,7 @@ void loop() {
   delay(1000);
  
   // Settings all the blocks based on a random int
-  for (unsigned char i = 0; i < 40; i++)
+  for (uint8_t i = 0; i < 40; i++)
   {
     screen.toggleBlocks(random(65536));
     screen.updateBlocks();

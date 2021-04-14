@@ -15,7 +15,7 @@ void setup() {
 
 void loop() {
   // Loop through the digits 1 to 16 (F), showing the colons every half second
-  for (unsigned char i = 0; i < 16; i++)
+  for (uint8_t i = 0; i < 16; i++)
   {
     screen.showNumbers(i, i, i, i, i, i, false, false);
     delay(500);
@@ -27,7 +27,7 @@ void loop() {
   delay(1000);
 
   // Show a custom number
-  for (unsigned char i = 0; i < 6; i++)
+  for (uint8_t i = 0; i < 6; i++)
   {
     screen.showNumberCustom(i, 0x01); // 0000 0001
     delay(100);
