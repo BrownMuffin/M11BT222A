@@ -221,6 +221,15 @@ void M11BT222A::showCharacter(byte seg, byte letter)
 	showCharacterCustom(seg, data);
 }
 
+void M11BT222A::showCharacter(byte seg, char letter)
+{
+	if (letter < 32 || letter > 127) letter = 127;
+
+	uint16_t data = charData[(uint8_t)letter - 32];
+	
+	showCharacterCustom(seg, data);
+}
+
 void M11BT222A::hideCharacter(byte seg)
 {
 	// Clamp the values

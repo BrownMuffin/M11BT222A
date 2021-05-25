@@ -103,6 +103,7 @@ class M11BT222A
 		
 		// 15 SEGMENT FUNCTIONS
 		void showCharacter(byte seg, byte letter);
+		void showCharacter(byte seg, char letter);
 		void hideCharacter(byte seg);
 		void showCharacterCustom(byte seg, uint16_t data);
 		
