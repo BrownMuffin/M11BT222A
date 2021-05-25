@@ -58,16 +58,16 @@ class M11BT222A
 	private:
 		uint8_t en_pin, din_pin, clk_pin, stb_pin;
 		
-		byte brightnessRam;
-		byte digitRam[8];
-		byte recRam;
+		uint8_t brightnessRam;
+		uint8_t digitRam[8];
+		uint8_t recRam;
 		uint16_t networkRam;
 		uint16_t blocksRam;
-		byte dotsRam;
-		byte discRam;
+		uint8_t dotsRam;
+		uint8_t discRam;
 		
 		// Table for all the hexidecimal digits
-		const byte digitData[16] = {
+		const uint8_t digitData[16] = {
 		0x77, 0x12, 0x6B, 0x5B, 0x1E, 0x5D, 0x7D, 0x13, 0x7F, 0x5F, 0x3F, 0x7C, 0x65, 0x7A, 0x6D, 0x2D };
 
 		// ASCII Table with 15 segment display characters, skipped the first 32 entries to make the table smaller
@@ -79,33 +79,33 @@ class M11BT222A
 			0x0200,	0xF107,	0xD552,	0x2144,	0x9552,	0xA145,	0xA105,	0xE146,	0xF007,	0x8550,	0x1046,	0xA825,	0x2044,	0xBA06,	0xB226,	0x3146,
 			0xF105,	0x3166,	0xF125,	0xE143,	0x8510,	0x3046,	0xA80C,	0xB02E,	0x8A28,	0xF043,	0x8948,	0x0000,	0x8410,	0x0000,	0xD005,	0xBB6E };
 		
-		void writeData(byte data);
-		void writeCommand(byte cmd);
-		void writeMemory(byte mem);
-		void writeDisplayRam(byte addr, byte data);
+		void writeData(uint8_t data);
+		void writeCommand(uint8_t cmd);
+		void writeMemory(uint8_t mem);
+		void writeDisplayRam(uint8_t addr, uint8_t data);
 	
 	public:
 		M11BT222A(uint8_t enable_pin, uint8_t data_in_pin, uint8_t clock_pin, uint8_t strobe_pin);
 		void initDisplay();
-		void initDisplay(byte brightness);
+		void initDisplay(uint8_t brightness);
 		void clearDisplay();
-		void setBrightness(byte brightness);
+		void setBrightness(uint8_t brightness);
 		void toggleDisplay(bool show);
 		
 		// 7 SEGMENT FUNCTIONS
-		void showNumbers(byte val, byte val1, byte val2, byte val3, byte val4, byte val5, bool colon1, bool colon2);
-		void showNumbers(byte val, byte val1, byte val2, byte val3, byte val4, byte val5);
-		void showNumber(byte seg, byte val);
-		void hideNumber(byte seg);
-		void showNumberCustom(byte seg, byte data);
+		void showNumbers(uint8_t val, uint8_t val1, uint8_t val2, uint8_t val3, uint8_t val4, uint8_t val5, bool colon1, bool colon2);
+		void showNumbers(uint8_t val, uint8_t val1, uint8_t val2, uint8_t val3, uint8_t val4, uint8_t val5);
+		void showNumber(uint8_t seg, uint8_t val);
+		void hideNumber(uint8_t seg);
+		void showNumberCustom(uint8_t seg, uint8_t data);
 		void showColons(bool colon1, bool colon2, bool colon3, bool colon4);
 		void showColon(uint8_t index, bool visible);
 		
 		// 15 SEGMENT FUNCTIONS
-		void showCharacter(byte seg, byte letter);
-		void showCharacter(byte seg, char letter);
-		void hideCharacter(byte seg);
-		void showCharacterCustom(byte seg, uint16_t data);
+		void showCharacter(uint8_t seg, char character);
+		void showCharacter(uint8_t seg, uint8_t character);
+		void hideCharacter(uint8_t seg);
+		void showCharacterCustom(uint8_t seg, uint16_t data);
 		
 		// ICON FUNCTIONS
 		void showIconAuto(bool visible);
@@ -127,23 +127,23 @@ class M11BT222A
 		
 		// NETWORK FUNCTIONS
 		void toggleNetworkDots(uint16_t dots);
-		void toggleNetworkDot(byte index, bool visible);
+		void toggleNetworkDot(uint8_t index, bool visible);
 		void clearNetworkDots();
 		void updateNetworkDots();
 		
 		// BLOCK FUNCTIONS
 		void toggleBlocks(uint16_t blocks);
-		void toggleBlock(byte x, byte y, bool visible);
-		void toggleBlock(byte index, bool visible);
+		void toggleBlock(uint8_t x, uint8_t y, bool visible);
+		void toggleBlock(uint8_t index, bool visible);
 		void updateBlocks();
 		
 		// DOTS FUNCTIONS
-		void toggleDots(byte dots);
-		void toggleDot(byte index, bool visible);
+		void toggleDots(uint8_t dots);
+		void toggleDot(uint8_t index, bool visible);
 		
 		// DISC FUNCTIONS
-		void toggleDisc(byte index, bool visible);
-		void toggleDisc(byte disc);
+		void toggleDisc(uint8_t index, bool visible);
+		void toggleDisc(uint8_t disc);
 };
 	
 #endif
